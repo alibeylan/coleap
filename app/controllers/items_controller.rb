@@ -4,8 +4,8 @@ class ItemsController < ApplicationController
   # GET /items 
   # GET /items?sort_by=price or /items?sort_by=model
   def index
-    # raise(Item.order(:model).inspect())
     @items = Item.all
+    update_items(@items)
 
     if (params[:sort_by] == "model")
       @items = Item.order(:model)
@@ -13,8 +13,6 @@ class ItemsController < ApplicationController
       @items = Item.order(:price)
     end
 
-
-    
     render json: JSON.pretty_generate(@items.as_json(except: [:created_at, :updated_at]))
 
   end
@@ -29,6 +27,12 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def update_items(items)
+    items.each do |i|
+      i.update(price: ActionController::Base.helpers.number_to_currency(i.price, unit: "EUR", format: "%n %u"))
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_item

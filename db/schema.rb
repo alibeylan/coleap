@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_142449) do
+ActiveRecord::Schema.define(version: 2022_02_09_154748) do
 
   create_table "cars", force: :cascade do |t|
     t.string "make"
@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 2022_02_09_142449) do
   create_table "items", force: :cascade do |t|
     t.string "make"
     t.string "model"
-    t.integer "price"
+    t.string "price"
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "colors"
+    t.string "colors"
     t.json "range"
   end
 
